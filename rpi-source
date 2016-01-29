@@ -339,8 +339,9 @@ if args.quiet:
 else:
     sh("cd %s && tar --checkpoint=100 --checkpoint-action=dot -xzf %s" % (args.dest, linux_tar))
 
-info("set 'EXTRAVERSION = +' in Makefile")
-sh("sed -i 's/EXTRAVERSION =.*/EXTRAVERSION = +/' %s" % os.path.join(linux_dir, 'Makefile'))
+info("Set + in .scmversion")
+with open(".scmversion","w") as f:
+    f.write("+")
 
 linux_symlink = os.path.join(args.dest, 'linux')
 info("Create symlink: %s" % linux_symlink)
